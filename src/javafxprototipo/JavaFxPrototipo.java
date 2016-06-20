@@ -25,6 +25,12 @@ import javafx.stage.Stage;
 
 public class JavaFxPrototipo extends Application {
     
+//editable tamaña de la interfaz    
+int TamañoX = 100;    
+int TamañoY = 100;    
+    
+
+
 Button T = new Button("Tab");
 Button T1 = new Button("Tab1");
 Button T2 = new Button("Tab2");
@@ -33,13 +39,14 @@ Tab tab;
 Tab tab1;
 Tab tab2;
 
-
-
+Group Pane;
+TabPane TPane;
+        
     @Override
     public void start(Stage Stage) {
     
-        TabPane TPane = new TabPane();
-        Group Pane = new Group();
+        TPane = new TabPane();
+        Pane = new Group();
         
         tab = new Tab();
         tab.setText("Tab 1");
@@ -76,15 +83,16 @@ Tab tab2;
            T2
          );
          
-         toolBar.setPrefSize(300,0);
-        T1.setOnAction(  event  ->  t( event ) );
+         toolBar.setPrefSize(TamañoX,0);
+        T.setOnAction(  event  ->  t( event ) );
+        T1.setOnAction(  event  ->  t1( event ) );
+        T2.setOnAction(  event  ->  t2( event ) );
 
          
-        TPane.getTabs().addAll(tab,tab1,tab2);
-        TPane.setPrefSize(300,250);
+        TPane.setPrefSize(TamañoX,TamañoY);
         Pane.getChildren().addAll(TPane,toolBar);
 
-        Scene scene = new Scene(Pane, 300, 250);        
+        Scene scene = new Scene(Pane,TamañoX,TamañoY);        
         Stage.setTitle("Prototype");
         Stage.setScene(scene);
         Stage.show();
@@ -94,8 +102,22 @@ Tab tab2;
         launch(args);
     }
 
+    
     private void t(ActionEvent event) {
         System.out.println("dez");
+        TPane.getTabs().clear();
+        TPane.getTabs().addAll(tab);
+
+    }
+
+    private void t1(ActionEvent event) {
+        TPane.getTabs().clear();
+        TPane.getTabs().addAll(tab1);
+    }
+
+    private void t2(ActionEvent event) {
+        TPane.getTabs().clear();
+        TPane.getTabs().addAll(tab2);
     }
     
 }
