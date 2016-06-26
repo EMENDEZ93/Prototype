@@ -2,6 +2,9 @@
 package javafxprototipo;
 
 import java.io.File;
+import javafx.animation.Interpolator;
+import javafx.animation.SequentialTransition;
+import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -22,6 +25,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /*
  * @author Edwin Mendez
@@ -429,38 +433,31 @@ int TamañoY = 600;
 
 
 
+
 //______________________________________________________________________________
-//pestaña 11
+//boton de ingresar
 
     //imagen de fondo para la pestaña    
         ImageView Fondo11 = new ImageView(new Image(getClass().getResourceAsStream("\\Image\\Rio.jpg")));
         Fondo11.setFitHeight(TamañoY);
         Fondo11.setFitWidth(TamañoX);
-        
-    
-    //creacion de la pestaña    
-        Tab tab11 = new Tab();
 
-    //boton para activar la pestaña    
-        Button BottonTab11 = new Button("Cerrar Sesion");            
-        BottonTab11.setOnAction( event -> BActionToolBarr(tab11,TPane) );
+        Button BIngresar = new Button("- Ingresar -");
+        BIngresar.setOnAction( event -> BActionIngresar(Fondo11) );
 
-    //pane para personalizar los nodos de cada pestaña    
-        Pane PaneTab11 = new Pane();
-        
-    //Nodos ha agregar    
-        Label n11 = new Label("<- Edwin Mendez ->");
-        n11.setLayoutX(100);
-        n11.setLayoutY(200);
-        
-    //agregar al nodo padre de la pestaña    
-        PaneTab11.getChildren().addAll(Fondo11,n11);
-        
-    //agregar PaneTab a la pestaña 
-        tab11.setContent(PaneTab11);
 //______________________________________________________________________________
 
 
+
+
+
+//______________________________________________________________________________
+//Boton cerrar sesion
+
+    //boton para activar la pestaña    
+        Button BCerrarSesion = new Button("Cerrar Sesion");            
+        BCerrarSesion.setOnAction( event -> BActionCerrarSesion(Fondo11) );
+//______________________________________________________________________________
 
 
          ToolBar toolBar = new ToolBar(
@@ -475,11 +472,15 @@ int TamañoY = 600;
            ,BottonTab8
            ,BottonTab9
            ,BottonTab10
-           ,BottonTab11
+           ,BCerrarSesion
          );         
          toolBar.setPrefSize(TamañoX,0);
-              
-        Pane.getChildren().addAll(TPane,toolBar);
+        
+
+         
+         
+         
+        Pane.getChildren().addAll(TPane,toolBar,Fondo11,BIngresar);
 
         Scene scene = new Scene(Pane,TamañoX,TamañoY);        
         Stage.setTitle("Prototype");
@@ -490,12 +491,61 @@ int TamañoY = 600;
     public static void main(String[] args) {
         launch(args);
     }
-
     
     private void BActionToolBarr(Tab Pestaña,TabPane TP) {
         TP.getTabs().clear();
         TP.getTabs().addAll(Pestaña);
-
     }
+
+    private void BActionIngresar(ImageView Fondo11) {
+    TranslateTransition translateTransition = new TranslateTransition( Duration.millis(1000), Fondo11);
+    translateTransition.setFromY(0);
+    translateTransition.setToY(-600);
+    translateTransition.setCycleCount(1);
+    translateTransition.setAutoReverse(false);
+    translateTransition.play();
+    }
+    
+    private void BActionCerrarSesion(ImageView Fondo11) {
+    TranslateTransition translateTransition = new TranslateTransition( Duration.millis(1000), Fondo11);
+    translateTransition.setFromY(-600);
+    translateTransition.setToY(0);
+    translateTransition.setCycleCount(1);
+    translateTransition.setAutoReverse(false);
+   /// translateTransition.play();
+   
+    TranslateTransition translateTransition2 = new TranslateTransition( Duration.millis(300), Fondo11);
+    translateTransition2.setFromY(0);
+    translateTransition2.setToY(-70);
+    translateTransition2.setCycleCount(1);
+    translateTransition2.setAutoReverse(false);
+   // translateTransition2.play();
+   
+    TranslateTransition translateTransition3 = new TranslateTransition( Duration.millis(300), Fondo11);
+    translateTransition3.setFromY(-70);
+    translateTransition3.setToY(0);
+    translateTransition3.setCycleCount(1);
+    translateTransition3.setAutoReverse(false);
+  //translateTransition.play();
+   
+    TranslateTransition translateTransition4 = new TranslateTransition( Duration.millis(250), Fondo11);
+    translateTransition4.setFromY(0);
+    translateTransition4.setToY(-30);
+    translateTransition4.setCycleCount(1);
+    translateTransition4.setAutoReverse(false);
+
+    TranslateTransition translateTransition5 = new TranslateTransition( Duration.millis(250), Fondo11);
+    translateTransition5.setFromY(-30);
+    translateTransition5.setToY(0);
+    translateTransition5.setCycleCount(1);
+    translateTransition5.setAutoReverse(false);
+    
+    SequentialTransition sequentialTransition = new SequentialTransition();
+    sequentialTransition.getChildren().addAll(translateTransition,translateTransition2,translateTransition3,translateTransition4,translateTransition5);
+    sequentialTransition.setCycleCount(1);
+    sequentialTransition.setAutoReverse(true);
+    sequentialTransition.play();
+    }
+        
     
 }
