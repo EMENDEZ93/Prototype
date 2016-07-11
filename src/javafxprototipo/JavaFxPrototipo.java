@@ -23,6 +23,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -39,6 +40,11 @@ int TamañoY = 600;
 
 //nodo padre para el scenne    
     Group Pane = new Group();
+ 
+    
+//clase de metodos    
+    Metodo Method = new Metodo();
+    
     
     @Override
     public void start(Stage Stage) {
@@ -362,7 +368,6 @@ int TamañoY = 600;
 
 
 
-
 //______________________________________________________________________________
 //pestaña 9
 
@@ -443,6 +448,10 @@ int TamañoY = 600;
         Fondo11.setFitWidth(TamañoX);
 
         Button BIngresar = new Button("- Ingresar -");
+        BIngresar.setLayoutX(340);
+        BIngresar.setLayoutY(470);
+        BIngresar.setShape(new Circle(1));
+        BIngresar.setPrefSize(100,100);
         BIngresar.setOnAction( event -> BActionIngresar(Fondo11) );
 
 //______________________________________________________________________________
@@ -498,53 +507,11 @@ int TamañoY = 600;
     }
 
     private void BActionIngresar(ImageView Fondo11) {
-    TranslateTransition translateTransition = new TranslateTransition( Duration.millis(1000), Fondo11);
-    translateTransition.setFromY(0);
-    translateTransition.setToY(-600);
-    translateTransition.setCycleCount(1);
-    translateTransition.setAutoReverse(false);
-    translateTransition.play();
+        Method.BActionIngresar(Fondo11);
     }
     
     private void BActionCerrarSesion(ImageView Fondo11) {
-    TranslateTransition translateTransition = new TranslateTransition( Duration.millis(1000), Fondo11);
-    translateTransition.setFromY(-600);
-    translateTransition.setToY(0);
-    translateTransition.setCycleCount(1);
-    translateTransition.setAutoReverse(false);
-   /// translateTransition.play();
-   
-    TranslateTransition translateTransition2 = new TranslateTransition( Duration.millis(300), Fondo11);
-    translateTransition2.setFromY(0);
-    translateTransition2.setToY(-70);
-    translateTransition2.setCycleCount(1);
-    translateTransition2.setAutoReverse(false);
-   // translateTransition2.play();
-   
-    TranslateTransition translateTransition3 = new TranslateTransition( Duration.millis(300), Fondo11);
-    translateTransition3.setFromY(-70);
-    translateTransition3.setToY(0);
-    translateTransition3.setCycleCount(1);
-    translateTransition3.setAutoReverse(false);
-  //translateTransition.play();
-   
-    TranslateTransition translateTransition4 = new TranslateTransition( Duration.millis(250), Fondo11);
-    translateTransition4.setFromY(0);
-    translateTransition4.setToY(-30);
-    translateTransition4.setCycleCount(1);
-    translateTransition4.setAutoReverse(false);
-
-    TranslateTransition translateTransition5 = new TranslateTransition( Duration.millis(250), Fondo11);
-    translateTransition5.setFromY(-30);
-    translateTransition5.setToY(0);
-    translateTransition5.setCycleCount(1);
-    translateTransition5.setAutoReverse(false);
-    
-    SequentialTransition sequentialTransition = new SequentialTransition();
-    sequentialTransition.getChildren().addAll(translateTransition,translateTransition2,translateTransition3,translateTransition4,translateTransition5);
-    sequentialTransition.setCycleCount(1);
-    sequentialTransition.setAutoReverse(true);
-    sequentialTransition.play();
+        Method.BActionCerrarSesion(Fondo11);
     }
         
     
